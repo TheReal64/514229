@@ -3,7 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
-  this.sharingContainer = document.querySelector(".score-sharing");
+  // this.sharingContainer = document.querySelector(".score-sharing");
 
   this.score = 0;
 }
@@ -62,7 +62,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (tile.value > 5702887) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
 
@@ -134,15 +134,15 @@ HTMLActuator.prototype.message = function (won) {
   var message = won ? "Alive!" : "Dead!";
 
   if (typeof ga !== "undefined") {
-    ga("send", "event", "game", "end", type, this.score);
+  ga("send", "event", "game", "end", type, this.score);
   }
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
 
-  this.clearContainer(this.sharingContainer);
-  this.sharingContainer.appendChild(this.scoreTweetButton());
-  twttr.widgets.load();
+  // this.clearContainer(this.sharingContainer);
+  // this.sharingContainer.appendChild(this.scoreTweetButton());
+  // twttr.widgets.load();
 };
 
 HTMLActuator.prototype.clearMessage = function () {
@@ -151,7 +151,7 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-over");
 };
 
-HTMLActuator.prototype.scoreTweetButton = function () {
+/*HTMLActuator.prototype.scoreTweetButton = function () {
   var tweet = document.createElement("a");
   tweet.classList.add("twitter-share-button");
   tweet.setAttribute("href", "https://twitter.com/share");
@@ -163,4 +163,4 @@ HTMLActuator.prototype.scoreTweetButton = function () {
   tweet.setAttribute("data-text", text);
 
   return tweet;
-};
+};*/
